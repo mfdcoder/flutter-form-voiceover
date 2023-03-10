@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const appTitle = 'TextFormField Semantics Voiceover Demo';
+    const appTitle = 'Web Screen Reader Issues Demo';
 
     return MaterialApp(
       title: appTitle,
