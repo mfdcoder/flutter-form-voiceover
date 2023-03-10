@@ -8,11 +8,8 @@ A sample App to demonstrate issues faced with Screen Readers on Web
 
 **Step 1:**
 
-Download or clone this repo by using the link below:
+Download or clone this repo:
 
-```
-https://github.com/progyny/member-portal-app.git
-```
 
 **Step 2:**
 
