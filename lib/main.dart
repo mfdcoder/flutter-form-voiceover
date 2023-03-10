@@ -466,7 +466,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       Text('Auto Scrolling with Screen Readers On',
                           style: TextStyle(fontWeight: FontWeight.w700)),
                       Text(
-                          'When screen readers are activated, the pages do not always auto scroll even though the focus is on the element that is outside the currently visible area'),
+                          'When screen readers are activated, the pages do not always auto scroll to the elements beyond the visible area of the browser. \nThis happens even when the reader announces the semantics for the element that is outside the currently visible area'),
                     ],
                   ),
                 ),
