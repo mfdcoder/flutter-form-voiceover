@@ -199,6 +199,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                 SizedBox(
                                   height: 20,
                                 ),
+                                 Text(
+                                    'On windows using NVDA, user is not able set focus or remove focus. \nFocus on actionable widgets can be set using Tab button'),
                               ],
                             ),
                           ),
@@ -374,7 +376,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       const Text('Alert Dialog',
                           style: TextStyle(fontWeight: FontWeight.w700)),
                       const Text(
-                          'Focus of alert dialog is not automatically set to title'),
+                          'Focus of alert dialog is not automatically set to title \n User is not aware that dialog box is opened since it is not announced by the screen reader'),
                       const SizedBox(height: 20),
                       ElevatedButton(
                         onPressed: () {
