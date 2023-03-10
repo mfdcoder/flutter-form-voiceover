@@ -21,7 +21,7 @@ flutter pub get
 
 ## Run on web
 
-Go to project root and execute the following command in terminal to get the required dependencies: 
+Go to project root and execute the following command in terminal to run the app in chrome browser
 
 ```
 flutter run -d chrome 
