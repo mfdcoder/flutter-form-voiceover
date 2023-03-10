@@ -28,6 +28,7 @@ flutter run -d chrome
 ```
 
 ## Issues with web screen readers
+## Issues need to be resolved on Mac and Windows on Chrome, Safari and Edge browser
 
 **1: Text Form Field**
 1. Text Form fields do not get a focus
