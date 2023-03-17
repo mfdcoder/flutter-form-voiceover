@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 
+import 'detail_screen.dart';
+
 void main() {
   runApp(const MyApp());
 
@@ -25,6 +27,9 @@ class MyApp extends StatelessWidget {
         // body: const MyCustomForm(),
         body: const MyHomePage(title: 'Semantics Demo'),
       ),
+      routes: {
+        '/detail-screen': (context) => const MyDetailScreen(),
+      },
     );
   }
 }
@@ -546,6 +551,31 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 const SizedBox(height: 20),
 
+                /// Navigate to another (child) screen
+                Column(
+                  children: [
+                    const Text(
+                      'Navigate to detail screen',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                    const Text(
+                      "When screen readers are activated and user tries to navigate to it's detail screen or it's child screen, the focus doesn't come on screen",
+                    ),
+                    const SizedBox(height: 20),
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.of(context).pushNamed(
+                          MyDetailScreen.routerName,
+                        );
+                      },
+                      child: const Text('Go To detail screen'),
+                    ),
+                    const SizedBox(height: 50),
+                  ],
+                ),
               ],
             ),
           ),
