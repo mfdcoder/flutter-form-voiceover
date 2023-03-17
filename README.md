@@ -39,12 +39,12 @@ flutter run -d chrome
 1. Focus of alert dialog is not automatically set to title.
 2. User is not aware that dialog box is opened since it is not announced by the screen reader
 
-### Temporary solution: Used SemanticsService.announce to resolve #2 (Works only on Mac web browesers)
+##### Temporary solution: Used SemanticsService.announce to resolve #2 (Works only on Mac web browesers)
 
 **3: Date Picker**
 1. When screen reader in enabled on web, if the first 3 rows of dates are disabled, user cannot select any valid date \nIn this example, user cannot select dates 23rd to 31st
 
-### Temporary solution: Used dates in text format in a DropdownButtonFormField
+##### Temporary solution: Used dates in text format in a DropdownButtonFormField
 
 **4: Snack Bar**
 1. Snack bars are not read out by windows screen readers NVDA
@@ -54,7 +54,7 @@ flutter run -d chrome
 Value is always returned as enabled.
 The mediaQueryData.accessibleNavigation return correct value on mobile app
 
-### Temporary solution:Added FAB button from which user has to enable Semantics ( RendererBinding.instance.setSemanticsEnabled(FAB button status);)
+##### Temporary solution:Added FAB button from which user has to enable Semantics ( RendererBinding.instance.setSemanticsEnabled(FAB button status);)
 
 **6: Auto Scrolling with Screen Readers On**
 1. When screen readers are activated, the pages do not always auto scroll to the elements beyond the visible area of the browser. This happens even when the reader announces the semantics for the element that is outside the currently visible area
