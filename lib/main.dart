@@ -4,6 +4,8 @@ import 'package:flutter/services.dart';
 
 void main() {
   runApp(const MyApp());
+
+  /// Enable Accessibility by default on Web
   RendererBinding.instance.setSemanticsEnabled(true);
 }
 
@@ -74,6 +76,7 @@ class _MyHomePageState extends State<MyHomePage> {
     super.dispose();
   }
 
+  /// Dialog Example
   Future<void> _showMyDialog() async {
     return showDialog<void>(
       context: context,
@@ -111,10 +114,12 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     final mediaQueryData = MediaQuery.of(context);
+
     return SingleChildScrollView(
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          /// Side Menu
           Flexible(
             flex: 1,
             fit: FlexFit.tight,
@@ -124,9 +129,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  const SizedBox(
-                    height: 20,
-                  ),
+                  const SizedBox(height: 20),
                   const SizedBox(
                     height: 50,
                     child: Text(
@@ -173,210 +176,234 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
           ),
+
+          /// Main Content
           Flexible(
             flex: 5,
             fit: FlexFit.tight,
             child: Column(
               children: [
+                /// Text Form Fields
                 Form(
-                    key: _formKey1,
-                    child: Padding(
-                      padding: const EdgeInsets.all(50),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Align(
-                            alignment: Alignment.topLeft,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: const [
-                                Text('Text Form fields',
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.w700)),
-                                Text('Text Form fields do not get a focus'),
-                                Text(
-                                    'See issue filed with flutter- https://github.com/flutter/flutter/issues/120894'),
-                                SizedBox(
-                                  height: 20,
+                  key: _formKey1,
+                  child: Padding(
+                    padding: const EdgeInsets.all(50),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: const [
+                              Text(
+                                'Text Form fields',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w700,
                                 ),
-                                 Text(
-                                    'On windows using NVDA, user is not able set focus or remove focus. \nFocus on actionable widgets can be set using Tab button'),
-                              ],
+                              ),
+                              Text('Text Form fields do not get a focus'),
+                              Text(
+                                'See issue filed with flutter- https://github.com/flutter/flutter/issues/120894',
+                              ),
+                              SizedBox(
+                                height: 20
+                              ),
+                              Text(
+                                'On windows using NVDA, user is not able set focus or remove focus. \nFocus on actionable widgets can be set using Tab button',
+                              ),
+                            ],
+                          ),
+                        ),
+                        Semantics(
+                          focusable: true,
+                          focused: _addressLine1.hasFocus,
+                          child: TextFormField(
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
+                            controller: _addressLine1Controller,
+                            keyboardType: TextInputType.text,
+                            textInputAction: TextInputAction.next,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter some text in line 1';
+                              }
+                              return null;
+                            },
+                            inputFormatters: [
+                              LengthLimitingTextInputFormatter(255)
+                            ],
+                            decoration: const InputDecoration(
+                              hintText: 'Address Line 1',
+                              labelText: 'Address Line 1',
+                              errorBorder: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(6)),
+                                borderSide: BorderSide(color: Colors.red),
+                              ),
+                            ),
+                            focusNode: _addressLine1,
+                            onSaved: (value) {
+                              _addressLine2.requestFocus();
+                            },
+                          ),
+                        ),
+                        Semantics(
+                          focusable: true,
+                          focused: _addressLine2.hasFocus,
+                          child: TextFormField(
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
+                            controller: _addressLine2Controller,
+                            keyboardType: TextInputType.text,
+                            textInputAction: TextInputAction.next,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter some text in line 2';
+                              }
+                              return null;
+                            },
+                            inputFormatters: [
+                              LengthLimitingTextInputFormatter(255)
+                            ],
+                            decoration: const InputDecoration(
+                              // enabledBorder: true,
+                              hintText: 'Address Line 2',
+                              labelText: 'Address Line 2',
+                              errorBorder: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(6)),
+                                borderSide: BorderSide(color: Colors.red),
+                              ),
+                            ),
+                            focusNode: _addressLine2,
+                            onSaved: (value) {
+                              _city.requestFocus();
+                            },
+                          ),
+                        ),
+                        Semantics(
+                          focusable: true,
+                          focused: _city.hasFocus,
+                          child: TextFormField(
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
+                            controller: _cityController,
+                            keyboardType: TextInputType.text,
+                            textInputAction: TextInputAction.next,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter some text for city';
+                              }
+                              return null;
+                            },
+                            inputFormatters: [
+                              LengthLimitingTextInputFormatter(100)
+                            ],
+                            focusNode: _city,
+                            onSaved: (value) {
+                              _state.requestFocus();
+                            },
+                            decoration: const InputDecoration(
+                              hintText: 'City',
+                              labelText: 'City',
+                              errorBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(6),
+                                ),
+                                borderSide: BorderSide(color: Colors.red),
+                              ),
                             ),
                           ),
-                          Semantics(
-                            focusable: true,
-                            focused: _addressLine1.hasFocus,
-                            child: TextFormField(
-                              autovalidateMode:
-                                  AutovalidateMode.onUserInteraction,
-                              controller: _addressLine1Controller,
-                              keyboardType: TextInputType.text,
-                              textInputAction: TextInputAction.next,
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Please enter some text in line 1';
-                                }
-                                return null;
-                              },
-                              inputFormatters: [
-                                LengthLimitingTextInputFormatter(255)
-                              ],
-                              decoration: const InputDecoration(
-                                  hintText: 'Address Line 1',
-                                  labelText: 'Address Line 1',
-                                  errorBorder: OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(6)),
-                                    borderSide: BorderSide(color: Colors.red),
-                                  )),
-                              focusNode: _addressLine1,
-                              onSaved: (value) {
-                                _addressLine2.requestFocus();
-                              },
+                        ),
+                        Semantics(
+                          focusable: true,
+                          focused: _state.hasFocus,
+                          child: TextFormField(
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
+                            controller: _stateController,
+                            keyboardType: TextInputType.text,
+                            textInputAction: TextInputAction.next,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter some text for state';
+                              }
+                              return null;
+                            },
+                            inputFormatters: [
+                              LengthLimitingTextInputFormatter(100)
+                            ],
+                            focusNode: _state,
+                            onSaved: (value) {
+                              _addressLine1.requestFocus();
+                            },
+                            decoration: const InputDecoration(
+                              hintText: 'State',
+                              labelText: 'State',
+                              errorBorder: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(6)),
+                                borderSide: BorderSide(color: Colors.red),
+                              ),
                             ),
                           ),
-                          Semantics(
-                            focusable: true,
-                            focused: _addressLine2.hasFocus,
-                            child: TextFormField(
-                              autovalidateMode:
-                                  AutovalidateMode.onUserInteraction,
-                              controller: _addressLine2Controller,
-                              keyboardType: TextInputType.text,
-                              textInputAction: TextInputAction.next,
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Please enter some text in line 2';
-                                }
-                                return null;
-                              },
-                              inputFormatters: [
-                                LengthLimitingTextInputFormatter(255)
-                              ],
-                              decoration: const InputDecoration(
-                                  // enabledBorder: true,
-                                  hintText: 'Address Line 2',
-                                  labelText: 'Address Line 2',
-                                  errorBorder: OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(6)),
-                                    borderSide: BorderSide(color: Colors.red),
-                                  )),
-                              focusNode: _addressLine2,
-                              onSaved: (value) {
-                                _city.requestFocus();
-                              },
-                            ),
-                          ),
-                          Semantics(
-                            focusable: true,
-                            focused: _city.hasFocus,
-                            child: TextFormField(
-                                autovalidateMode:
-                                    AutovalidateMode.onUserInteraction,
-                                controller: _cityController,
-                                keyboardType: TextInputType.text,
-                                textInputAction: TextInputAction.next,
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'Please enter some text for city';
-                                  }
-                                  return null;
-                                },
-                                inputFormatters: [
-                                  LengthLimitingTextInputFormatter(100)
-                                ],
-                                focusNode: _city,
-                                onSaved: (value) {
-                                  _state.requestFocus();
-                                },
-                                decoration: const InputDecoration(
-                                    hintText: 'City',
-                                    labelText: 'City',
-                                    errorBorder: OutlineInputBorder(
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(6)),
-                                      borderSide: BorderSide(color: Colors.red),
-                                    ))
-                                // ),
+                        ),
+                        const SizedBox(height: 50),
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: const [
+                              Text(
+                                'Validation Errors',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w700,
                                 ),
+                              ),
+                              Text(
+                                'Validation error are only read the first time user clicks the submit button',
+                              ),
+                              SizedBox(height: 20),
+                            ],
                           ),
-                          Semantics(
-                            focusable: true,
-                            focused: _state.hasFocus,
-                            child: TextFormField(
-                                autovalidateMode:
-                                    AutovalidateMode.onUserInteraction,
-                                controller: _stateController,
-                                keyboardType: TextInputType.text,
-                                textInputAction: TextInputAction.next,
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'Please enter some text for state';
-                                  }
-                                  return null;
-                                },
-                                inputFormatters: [
-                                  LengthLimitingTextInputFormatter(100)
-                                ],
-                                focusNode: _state,
-                                onSaved: (value) {
-                                  _addressLine1.requestFocus();
-                                },
-                                decoration: const InputDecoration(
-                                    hintText: 'State',
-                                    labelText: 'State',
-                                    errorBorder: OutlineInputBorder(
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(6)),
-                                      borderSide: BorderSide(color: Colors.red),
-                                    ))
-                                // ),
+                        ),
+                        ElevatedButton(
+                          onPressed: () {
+                            if (_formKey1.currentState!.validate()) {
+                              // If the form is valid, display a snackbar. In the real world,
+                              // you'd often call a server or save the information in a database.
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text('Processing Data'),
                                 ),
-                          ),
-                          const SizedBox(
-                            height: 50,
-                          ),
-                          Align(
-                            alignment: Alignment.topLeft,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: const [
-                                Text('Validation Errors',
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.w700)),
-                                Text(
-                                    'Validation error are only read the first time user clicks the submit button'),
-                                SizedBox(
-                                  height: 20,
-                                ),
-                              ],
-                            ),
-                          ),
-                          ElevatedButton(
-                              onPressed: () {
-                                if (_formKey1.currentState!.validate()) {
-                                  // If the form is valid, display a snackbar. In the real world,
-                                  // you'd often call a server or save the information in a database.
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                        content: Text('Processing Data')),
-                                  );
-                                }
-                              },
-                              child: const Text('Submit')),
-                        ],
-                      ),
-                    )),
+                              );
+                            }
+                          },
+                          child: const Text('Submit'),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+
+                /// Alert Dialog
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 30),
                   child: Column(
                     children: [
-                      const Text('Alert Dialog',
-                          style: TextStyle(fontWeight: FontWeight.w700)),
                       const Text(
-                          'Focus of alert dialog is not automatically set to title \n User is not aware that dialog box is opened since it is not announced by the screen reader'),
+                        'Alert Dialog',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                      const Text(
+                        'Focus of alert dialog is not automatically set to title \n User is not aware that dialog box is opened since it is not announced by the screen reader',
+                      ),
                       const SizedBox(height: 20),
                       ElevatedButton(
                         onPressed: () {
@@ -387,14 +414,22 @@ class _MyHomePageState extends State<MyHomePage> {
                     ],
                   ),
                 ),
+
+                /// Date Picker
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 30),
                   child: Column(
                     children: [
-                      const Text('Date Picker',
-                          style: TextStyle(fontWeight: FontWeight.w700)),
                       const Text(
-                          'When screen reader in enabled on web, if the first 3 rows of dates are disabled, user cannot select any valid date \nIn this example, user cannot select dates 23rd to 31st'),
+                        'Date Picker',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                      const Text(
+                        'When screen reader in enabled on web, if the first 3 rows of dates are disabled, user cannot select any valid date \nIn this example, user cannot select dates 23rd to 31st',
+                      ),
                       const SizedBox(height: 20),
                       ElevatedButton(
                         onPressed: () {
@@ -420,22 +455,29 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ),
 
-                //Snack Bar
+                // Snack Bar
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 30),
                   child: Column(
                     children: [
-                      const Text('Snack Bar',
-                          style: TextStyle(fontWeight: FontWeight.w700)),
                       const Text(
-                          'Snack bars are not read out by windows screen readers NVDA'),
+                        'Snack Bar',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                      const Text(
+                        'Snack bars are not read out by windows screen readers NVDA',
+                      ),
                       const SizedBox(height: 20),
                       ElevatedButton(
                         onPressed: () {
-                          ScaffoldMessenger.of(context)
-                              .showSnackBar(const SnackBar(
-                            content: Text('Yay! A SnackBar!'),
-                          ));
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Yay! A SnackBar!'),
+                            ),
+                          );
                         },
                         child: const Text('Show Snack bar'),
                       ),
@@ -443,13 +485,18 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ),
 
-                //Detecting of screen reader is on
+                // Detecting of screen reader is on
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 30),
                   child: Column(
                     children: [
-                      const Text('Detecting if screen reader is enabled',
-                          style: TextStyle(fontWeight: FontWeight.w700)),
+                      const Text(
+                        'Detecting if screen reader is enabled',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
                       const Text(
                           'On web, we are unable to detect if screen readers are enabled using mediaQueryData.accessibleNavigation \nValue is always returned as enabled \nThe mediaQueryData.accessibleNavigation return correct value on mobile app '),
                       Text(
@@ -458,42 +505,47 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ),
 
-//Auto Scrolling
+                /// Auto Scrolling
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 30),
                   child: Column(
                     children: const [
-                      Text('Auto Scrolling with Screen Readers On',
-                          style: TextStyle(fontWeight: FontWeight.w700)),
                       Text(
-                          'When screen readers are activated, the pages do not always auto scroll to the elements beyond the visible area of the browser. \nThis happens even when the reader announces the semantics for the element that is outside the currently visible area'),
+                        'Auto Scrolling with Screen Readers On',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                      Text(
+                        'When screen readers are activated, the pages do not always auto scroll to the elements beyond the visible area of the browser. \nThis happens even when the reader announces the semantics for the element that is outside the currently visible area',
+                      ),
                     ],
                   ),
                 ),
-                // SingleChildScrollView(
-                  // child:
-                   ListView(
-                    shrinkWrap: true,
-                    padding: const EdgeInsets.all(8),
-                    children: <Widget>[
-                      Container(
-                        height: 50,
-                        color: Colors.amber[600],
-                        child: const Center(child: Text('Entry A')),
-                      ),
-                      Container(
-                        height: 50,
-                        color: Colors.amber[500],
-                        child: const Center(child: Text('Entry B')),
-                      ),
-                      Container(
-                        height: 50,
-                        color: Colors.amber[100],
-                        child: const Center(child: Text('Entry C')),
-                      ),
-                    ],
-                  ),
-                // )
+                ListView(
+                  shrinkWrap: true,
+                  padding: const EdgeInsets.all(8),
+                  children: <Widget>[
+                    Container(
+                      height: 50,
+                      color: Colors.amber[600],
+                      child: const Center(child: Text('Entry A')),
+                    ),
+                    Container(
+                      height: 50,
+                      color: Colors.amber[500],
+                      child: const Center(child: Text('Entry B')),
+                    ),
+                    Container(
+                      height: 50,
+                      color: Colors.amber[100],
+                      child: const Center(child: Text('Entry C')),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 20),
+
               ],
             ),
           ),
