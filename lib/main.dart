@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
 /// Local imports
+import 'tabbar.dart';
 import 'snackbar.dart';
 import 'side_menu.dart';
 import 'date_picker.dart';
@@ -120,6 +121,9 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ),
                   const SizedBox(height: 10),
+
+                  /// Tab Bar navigation
+                  const MyTabBar(),
                 ],
               ),
             ),
