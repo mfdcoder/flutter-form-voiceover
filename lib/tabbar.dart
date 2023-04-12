@@ -21,7 +21,7 @@ class MyTabBar extends StatelessWidget {
             '1. When browser zoom level is 100% and Voiceover is ON, Tab Bar functionality works as intended - Tabs switches upon click',
           ),
           const Text(
-            '2. When browser zoom level is 90% or below and Voiceover is ON, Tab switches automatically without even clicking on tab, when navigating via VO keyboard commands',
+            '2. When browser zoom level is 90% or below and Voiceover is ON, then while "navigating/iterating the data-content" under TAB 2 - Tab switches automatically without even clicking on tab, when navigating via VO keyboard commands',
           ),
           const SizedBox(height: 20),
           SizedBox(
@@ -67,6 +67,7 @@ class MyTabBar extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: const [
+                              ///
                               Text('One'),
                               Text('Value One'),
                               Divider(),
