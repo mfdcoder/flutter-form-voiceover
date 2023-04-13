@@ -92,18 +92,18 @@ class MyTabBar extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: const [
                               ///
-                              Text('One'),
-                              Text('Value One'),
+                              Text('Four'),
+                              Text('Value Four'),
                               Divider(),
 
                               ///
-                              Text('Two'),
-                              Text('Value Two'),
+                              Text('Five'),
+                              Text('Value Five'),
                               Divider(),
 
                               ///
-                              Text('Three'),
-                              Text('Value Three'),
+                              Text('Six'),
+                              Text('Value Six'),
                               Divider(),
                             ],
                           ),
