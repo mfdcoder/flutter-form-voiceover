@@ -7,6 +7,7 @@ import 'snackbar.dart';
 import 'side_menu.dart';
 import 'date_picker.dart';
 import 'alert_dialog.dart';
+import 'radio_button.dart';
 import 'detail_screen.dart';
 import 'auto_scrolling.dart';
 import 'text_form_field.dart';
@@ -14,8 +15,6 @@ import 'accessible_navigation.dart';
 
 void main() {
   runApp(const MyApp());
-
-  /// Enable Accessibility by default on Web
   RendererBinding.instance.setSemanticsEnabled(true);
 }
 
@@ -124,6 +123,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
                   /// Tab Bar navigation
                   const MyTabBar(),
+
+                  /// Radio Button Inside Dialog
+                  const MyRadioDialog(),
                 ],
               ),
             ),
